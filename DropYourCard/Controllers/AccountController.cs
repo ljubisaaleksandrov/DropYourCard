@@ -1,25 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
+using DropYourCard.Data.Models;
+using DropYourCard.Enums;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using DropYourCard.Filters;
+using DropYourCard.Helpers;
 using DropYourCard.Models;
 
 namespace DropYourCard.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private DataContext dataContext;
+        
+        public AccountController()
+        {
+            dataContext = new DataContext();
+        }
+
         //
         // GET: /Account/Login
-
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -35,14 +46,25 @@ namespace DropYourCard.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid)
             {
-                return RedirectToLocal(returnUrl);
+                User user = dataContext.Users.FirstOrDefault(u => u.UserName == model.UserName && u.Password == model.Password);
+                if (user != null)
+                {
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    return RedirectToLocal(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    return View(model);
+                }
             }
-
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            return View(model);
+            else
+            {
+                ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                return View(model);
+            }
         }
 
         //
@@ -52,6 +74,7 @@ namespace DropYourCard.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            FormsAuthentication.SignOut();
             WebSecurity.Logout();
 
             return RedirectToAction("Index", "Home");
@@ -68,29 +91,111 @@ namespace DropYourCard.Controllers
 
         //
         // POST: /Account/Register
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(Register model)
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-                try
+                // Ove dve provere mora da se izmene da ide preko Ajax provere 
+                bool isUserUnique = true;
+                if (dataContext.Users.Any(u => u.Email == model.Email))
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError("", "User with providen Email already exist");
+                    isUserUnique = false;
                 }
-                catch (MembershipCreateUserException e)
+                if (dataContext.Users.Any(u => u.UserName == model.UserName))
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    ModelState.AddModelError("", "User with providen UserName already exist");
+                    isUserUnique = false;
+                }
+
+                if (isUserUnique)
+                {
+                    try
+                    {
+                        User newUser = new User()
+                        {
+                            AccessLevel = (int)UserAccessLevel.Member,
+                            Email = model.Email,
+                            UserName = model.UserName,
+                            Password = model.Password,
+                            IsSuspended = false,
+                            IsSuspendedOnChat = false,
+                            IsVerified = false,
+                            PlayStatus = 1
+                        };
+
+                        UserInfo newUserInfo = new UserInfo()
+                        {
+                            UserID = newUser.Id,
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            Address = model.Address,
+                            City = model.City,
+                            Country = model.Country,
+                            DOB = DateTime.Parse(model.DOB).Date,
+                            Phone = model.Phone,
+                            RegistrationDate = DateTime.Now,
+                        };
+
+                        newUser.UserInfoes.Add(newUserInfo);
+
+                        dataContext.Users.Add(newUser);
+                        dataContext.UserInfoes.Add(newUserInfo);
+                        dataContext.SaveChanges();
+
+                        // Ovde se salje mail za verifikaciju
+
+                        string url = Url.Action("ConfirmEmail", "Account", new { id = newUser.Id, token = TokentGenerator.GenerateToken(newUser) }, Request.Url.Scheme);
+                        EmailHelper.SendConfirmEmail(newUser, url);
+
+                        //return RedirectToAction("Confirm", "Account", new { Email = user.Email });
+
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    catch (DbEntityValidationException dbEx)
+                    {
+                        foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        {
+                            foreach (var validationError in validationErrors.ValidationErrors)
+                            {
+                                Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                            }
+                        }
+                    }
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ConfirmEmail(int id, string token)
+        {
+            User currentUser = dataContext.Users.FirstOrDefault(u => u.Id == id);
+            string currentUserToken = TokentGenerator.GenerateToken(currentUser);
+            if (token == currentUserToken)
+            {
+                if (currentUser.IsVerified)
+                {
+                    ViewData["confirmMessage"] = "You have already been verified!";
+                }
+                else
+                {
+                    currentUser.IsVerified = true;
+                    dataContext.SaveChanges();
+                    ViewData["confirmMessage"] = "You are successfuly verified!";
+                }
+            }
+            else
+                ViewData["confirmMessage"] = "There is an error in verification process!";
+
+
+            return View();
         }
 
         //
@@ -263,14 +368,14 @@ namespace DropYourCard.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                using (DataContext db = new DataContext())
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    User user = db.Users.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.Users.Add(new User { UserName = model.UserName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
@@ -403,5 +508,7 @@ namespace DropYourCard.Controllers
             }
         }
         #endregion
+
+
     }
 }

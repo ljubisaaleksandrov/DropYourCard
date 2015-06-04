@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "ConfirmEmail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ConfirmEmail</h2>
+
+<br/>
+<br/>
+
+<h2>@ViewData["confirmMessage"]</h2>
+
+<h4 style="padding-top: 50px">You will be redirected to a Home Page in a few seconds...</h4>
+
+
+
+<script>
+
+    window.onload = setTimeout (function() {
+        window.location.href = '@Url.Action("Index","Home")';
+    },5000);
+
+</script>

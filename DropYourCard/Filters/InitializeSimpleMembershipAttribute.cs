@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
+using DropYourCard.Data.Models;
 using WebMatrix.WebData;
 using DropYourCard.Models;
 
@@ -25,11 +26,11 @@ namespace DropYourCard.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<DataContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new DataContext())
                     {
                         if (!context.Database.Exists())
                         {
@@ -38,7 +39,7 @@ namespace DropYourCard.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("DataContext", "Users", "Id", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

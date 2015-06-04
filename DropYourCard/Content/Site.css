@@ -99,9 +99,10 @@ h5, h6 {
 }
 
 #body {
-    background-color: #efeeef;
+    background-color: #ffffff;
     clear: both;
-    padding-bottom: 35px;
+    padding-top: 20px;
+    padding-bottom: 30px;
 }
 
     .main-content {
@@ -115,12 +116,12 @@ h5, h6 {
     }
 
 header .content-wrapper {
-    padding-top: 20px; 
+    padding-top: 10px; 
 }
 
 footer {
     clear: both;
-    background-color: #e2e2e2;
+    background-color: #ffffff;
     font-size: .8em;
     height: 100px;
 }

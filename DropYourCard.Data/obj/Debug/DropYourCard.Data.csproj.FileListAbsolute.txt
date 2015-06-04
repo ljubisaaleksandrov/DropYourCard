@@ -1,0 +1,10 @@
+F:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\DropYourCard.Data.dll.config
+F:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\DropYourCard.Data.dll
+F:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\DropYourCard.Data.pdb
+F:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.dll
+F:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.SqlServer.dll
+F:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.xml
+F:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.SqlServer.xml
+F:\GitHub\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.dll
+F:\GitHub\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.pdb
+F:\GitHub\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.csprojResolveAssemblyReference.cache

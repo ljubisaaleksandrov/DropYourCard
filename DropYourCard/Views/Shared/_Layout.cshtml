@@ -25,22 +25,37 @@
                         </a>
                     </p>
                 </div>
-                <div class="float-right">
-                    <nav class="navbar navbar-left" style="font-size: 20px; padding-top: 20px">
-                        <ul class="list-inline">
+                <div class="float-right" style="height: 90px; padding-top:10px">
+                    <nav class="navbar navbar-left" style="font-size: 20px;">
+                        <ul class="list-inline" style="height:100%">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         @if (Request.IsAuthenticated) {
+                            if (File.Exists(Server.MapPath("~/Images/ProfilePhotos/default.jpg")))
+                            {
+                                <li style="padding-left: 50px;">
+                                    <img src="~/Images/ProfilePhotos/default.jpg" style="border: #9AD9EA; -ms-border-radius: 5px; border-radius: 5px; border-style: solid; margin-bottom: 20px; height: 64px; width: 64px"/>
+                                    <img id="messageAvatar" src="~/Images/ProfilePhotos/message.png" style="margin-top: -70px; margin-left: -15px; visibility:collapse"/>
+                                </li>
+                            }
+                            else
+                            {
+                                <li style="padding-left: 50px;">
+                                    <img src="~/Images/ProfilePhotos/default.jpg" style="height: 64px; width: 64px"/>
+                                    <img id="messageAvatar" src="~/Images/ProfilePhotos/message.png" style="margin-bottom: 80px; margin-left: -15px; visibility:hidden"/>
+                                </li>
+                            }
+
+                            <li style="margin-left:-10px">@Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new {@class = "username", title = "Manage"})</li>
                             <li>
-                                Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
-                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
                                     @Html.AntiForgeryToken()
                                     <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
                                 }
                             </li>
                         } else {
-                                <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                                <li  style="padding-left: 50px;">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                                 <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                         }
                         </ul>

@@ -34,6 +34,7 @@ namespace DropYourCard.Data.Models.Mapping
             this.Property(t => t.IsSuspendedOnChat).HasColumnName("IsSuspendedOnChat");
             this.Property(t => t.IsVerified).HasColumnName("IsVerified");
             this.Property(t => t.PlayStatus).HasColumnName("PlayStatus");
+            this.Property(t => t.Gender).HasColumnName("Gender");
         }
     }
 }

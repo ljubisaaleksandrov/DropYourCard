@@ -22,6 +22,7 @@ namespace DropYourCard.Data.Models
         public bool IsSuspendedOnChat { get; set; }
         public bool IsVerified { get; set; }
         public int PlayStatus { get; set; }
+        public Nullable<bool> Gender { get; set; }
         public virtual ICollection<ExceptionLog> ExceptionLogs { get; set; }
         public virtual ICollection<LoginSession> LoginSessions { get; set; }
         public virtual ICollection<Player> Players { get; set; }

@@ -52,6 +52,24 @@ namespace DropYourCard.Controllers
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    LoginSession currentSession = dataContext.LoginSessions.FirstOrDefault(ls => ls.UserID == user.Id);
+                    if (currentSession != null)
+                    {
+                        currentSession.IPAddress = HttpContext.Request.UserHostAddress;
+                        currentSession.LastLogin = DateTime.Now;
+                    }
+                    else
+                    {
+                        currentSession = new LoginSession()
+                        {
+                            IPAddress = HttpContext.User.Identity.Name,
+                            LastLogin = DateTime.Now,
+                            UserID = user.Id
+                        };
+                        dataContext.LoginSessions.Add(currentSession);
+                    }
+                    
+                    dataContext.SaveChanges();
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -75,7 +93,11 @@ namespace DropYourCard.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+<<<<<<< HEAD
 
+=======
+         
+>>>>>>> origin/master
             return RedirectToAction("Index", "Home");
         }
 
@@ -145,13 +167,8 @@ namespace DropYourCard.Controllers
                         dataContext.UserInfoes.Add(newUserInfo);
                         dataContext.SaveChanges();
 
-                        // Ovde se salje mail za verifikaciju
-
                         string url = Url.Action("ConfirmEmail", "Account", new { id = newUser.Id, token = TokentGenerator.GenerateToken(newUser) }, Request.Url.Scheme);
                         EmailHelper.SendConfirmEmail(newUser, url);
-
-                        //return RedirectToAction("Confirm", "Account", new { Email = user.Email });
-
 
                         return RedirectToAction("Index", "Home");
                     }
@@ -187,6 +204,7 @@ namespace DropYourCard.Controllers
                 {
                     currentUser.IsVerified = true;
                     dataContext.SaveChanges();
+                    FormsAuthentication.SetAuthCookie(currentUser.UserName, false);
                     ViewData["confirmMessage"] = "You are successfuly verified!";
                 }
             }

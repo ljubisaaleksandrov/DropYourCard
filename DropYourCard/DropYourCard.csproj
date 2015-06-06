@@ -279,6 +279,8 @@
     <Content Include="Icon.png" />
     <Content Include="Images\Common\Background.jpg" />
     <Content Include="Images\Common\Logo.jpg" />
+    <Content Include="Images\ProfilePhotos\default.jpg" />
+    <Content Include="Images\ProfilePhotos\message.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />

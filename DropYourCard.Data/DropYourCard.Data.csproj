@@ -49,14 +49,12 @@
   <ItemGroup>
     <Compile Include="Models\ChatMessage.cs" />
     <Compile Include="Models\ExceptionLog.cs" />
-    <Compile Include="Models\ExceptionLog1.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameChatMessage.cs" />
     <Compile Include="Models\GamesList.cs" />
     <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\LoginSession.cs" />
     <Compile Include="Models\Mapping\ChatMessageMap.cs" />
-    <Compile Include="Models\Mapping\ExceptionLog1Map.cs" />
     <Compile Include="Models\Mapping\ExceptionLogMap.cs" />
     <Compile Include="Models\Mapping\GameChatMessageMap.cs" />
     <Compile Include="Models\Mapping\GameMap.cs" />

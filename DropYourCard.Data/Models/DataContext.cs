@@ -18,7 +18,6 @@ namespace DropYourCard.Data.Models
 
         public DbSet<ChatMessage> ChatMessages { get; set; }
         public DbSet<ExceptionLog> ExceptionLogs { get; set; }
-        public DbSet<ExceptionLog1> ExceptionLogs1 { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<GameChatMessage> GameChatMessages { get; set; }
         public DbSet<GamesList> GamesLists { get; set; }
@@ -33,7 +32,6 @@ namespace DropYourCard.Data.Models
         {
             modelBuilder.Configurations.Add(new ChatMessageMap());
             modelBuilder.Configurations.Add(new ExceptionLogMap());
-            modelBuilder.Configurations.Add(new ExceptionLog1Map());
             modelBuilder.Configurations.Add(new GameMap());
             modelBuilder.Configurations.Add(new GameChatMessageMap());
             modelBuilder.Configurations.Add(new GamesListMap());

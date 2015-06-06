@@ -75,7 +75,6 @@ namespace DropYourCard.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-            WebSecurity.Logout();
 
             return RedirectToAction("Index", "Home");
         }

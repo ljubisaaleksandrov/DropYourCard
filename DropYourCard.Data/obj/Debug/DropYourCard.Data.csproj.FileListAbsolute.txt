@@ -8,3 +8,13 @@ F:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.SqlServer.xml
 F:\GitHub\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.dll
 F:\GitHub\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.pdb
 F:\GitHub\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.csprojResolveAssemblyReference.cache
+C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\bin\Debug\DropYourCard.Data.dll.config
+C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\bin\Debug\DropYourCard.Data.dll
+C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\bin\Debug\DropYourCard.Data.pdb
+C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.dll
+C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.xml
+C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.csprojResolveAssemblyReference.cache
+C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.dll
+C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.pdb

@@ -93,11 +93,7 @@ namespace DropYourCard.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-<<<<<<< HEAD
-
-=======
          
->>>>>>> origin/master
             return RedirectToAction("Index", "Home");
         }
 

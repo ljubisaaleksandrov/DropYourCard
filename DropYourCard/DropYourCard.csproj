@@ -186,6 +186,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Enums\Card.cs" />
     <Compile Include="Enums\EmailTemplate.cs" />
     <Compile Include="Enums\GameStatus.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Helpers\CsvHelper.cs" />
     <Compile Include="Helpers\TokentGenerator.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -326,6 +328,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

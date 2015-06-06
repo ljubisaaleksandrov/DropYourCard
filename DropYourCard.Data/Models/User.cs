@@ -7,7 +7,7 @@ namespace DropYourCard.Data.Models
     {
         public User()
         {
-            this.ExceptionLogs = new List<ExceptionLog>();
+            this.ExceptionLogs = new List<ExceptionLog1>();
             this.LoginSessions = new List<LoginSession>();
             this.Players = new List<Player>();
             this.UserInfoes = new List<UserInfo>();
@@ -22,7 +22,8 @@ namespace DropYourCard.Data.Models
         public bool IsSuspendedOnChat { get; set; }
         public bool IsVerified { get; set; }
         public int PlayStatus { get; set; }
-        public virtual ICollection<ExceptionLog> ExceptionLogs { get; set; }
+        public Nullable<bool> Gender { get; set; }
+        public virtual ICollection<ExceptionLog1> ExceptionLogs { get; set; }
         public virtual ICollection<LoginSession> LoginSessions { get; set; }
         public virtual ICollection<Player> Players { get; set; }
         public virtual ICollection<UserInfo> UserInfoes { get; set; }

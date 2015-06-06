@@ -8,30 +8,25 @@ namespace DropYourCard.Data.Models.Mapping
         public ExceptionLogMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            this.HasKey(t => new { t.Id, t.Type, t.Message, t.DateCreated });
 
             // Properties
-            this.Property(t => t.Url)
-                .HasMaxLength(50);
+            this.Property(t => t.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            this.Property(t => t.Type)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.Message)
                 .IsRequired()
-                .HasMaxLength(500);
+                .HasMaxLength(1000);
 
             // Table & Column Mappings
-            this.ToTable("ExceptionLogs");
+            this.ToTable("ExceptionLog");
             this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.UserID).HasColumnName("UserID");
-            this.Property(t => t.Url).HasColumnName("Url");
+            this.Property(t => t.Type).HasColumnName("Type");
             this.Property(t => t.Message).HasColumnName("Message");
             this.Property(t => t.DateCreated).HasColumnName("DateCreated");
-            this.Property(t => t.IsSolved).HasColumnName("IsSolved");
-
-            // Relationships
-            this.HasRequired(t => t.User)
-                .WithMany(t => t.ExceptionLogs)
-                .HasForeignKey(d => d.UserID);
-
         }
     }
 }

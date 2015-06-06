@@ -47,20 +47,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ChatMessage.cs" />
     <Compile Include="Models\ExceptionLog.cs" />
+    <Compile Include="Models\ExceptionLog1.cs" />
     <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\GameChatMessage.cs" />
     <Compile Include="Models\GamesList.cs" />
     <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\LoginSession.cs" />
+    <Compile Include="Models\Mapping\ChatMessageMap.cs" />
+    <Compile Include="Models\Mapping\ExceptionLog1Map.cs" />
     <Compile Include="Models\Mapping\ExceptionLogMap.cs" />
+    <Compile Include="Models\Mapping\GameChatMessageMap.cs" />
     <Compile Include="Models\Mapping\GameMap.cs" />
     <Compile Include="Models\Mapping\GamesListMap.cs" />
     <Compile Include="Models\Mapping\LoginSessionMap.cs" />
     <Compile Include="Models\Mapping\PlayerMap.cs" />
+    <Compile Include="Models\Mapping\PrivateMessageMap.cs" />
     <Compile Include="Models\Mapping\RoomMap.cs" />
     <Compile Include="Models\Mapping\UserInfoMap.cs" />
     <Compile Include="Models\Mapping\UserMap.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PrivateMessage.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserInfo.cs" />

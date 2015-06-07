@@ -203,6 +203,7 @@
     <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="Helpers\CsvHelper.cs" />
     <Compile Include="Helpers\TokentGenerator.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Models\Login.cs" />

@@ -1,0 +1,108 @@
+﻿@using System.Collections
+@using System.Web.Mvc.Html
+@using System.Web.UI.WebControls
+@using DropYourCard.Data.Models
+@model IEnumerable<DropYourCard.Data.Models.PrivateMessage>
+
+@{
+    ViewBag.Title = "Messages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="privateChat" style="width: 100%; height: 600px; padding-top: 20px">
+    <div style="width: 20%; float: left;">
+        @Html.DropDownList("Select User", (IEnumerable<SelectListItem>)ViewBag.listItems, "Select User", new { @class="form-control", @style="width:80%"})
+        <br/>
+        @foreach (string userName in (List<string>) ViewBag.chattersList)
+        {
+            <button type="button" id="@userName" class="btn btn-primary" style="width:80%; height: 40px; text-align: center; margin-top: 2px">@userName</button>
+        }
+    </div>
+    <div style="width: 80%; float: right; height:100%">
+        <div id="chat-scroll" style="height: 80%; width: 100%;" class="scroll">
+            @{
+                Html.RenderPartial("_GetMessages", (IEnumerable<PrivateMessage>)Model);
+            }
+        </div>
+        <div style="bottom: 0; position: relative; margin-top:20px">
+            <textarea id="newMessage" class="form-control" style="width: 80%; float:left"></textarea>
+            <br/><button id="submit" class="btn btn-default" style="float:right">Send</button>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    });
+
+    $(document).ready(function () {
+
+        $("button").click(function () {
+            if (this.id !== "submit")
+            {
+                $.ajax({
+                    url: "/Profile/Messages/",
+                    type: "POST",
+                    data: { userName: this.id },
+                    success: function (data) {
+                        $("#messagesDiv").html('');
+                        $("#messagesDiv").html(data);
+                        //alert(data);
+                        Scroll();
+                    },
+                    error: function (data) {
+                        //alert("error");
+                    }
+                });
+            } else {
+                SendMessage();
+            }
+        });
+
+        Scroll();
+
+    });
+
+    $("textarea").keypress(function (e) {
+        if (e.keyCode === 13 && !e.shiftKey) {
+            SendMessage();
+            $(this).val('').focus();
+            return false;
+        }
+    });
+
+    function SendMessage() {
+        var text = $("textarea#newMessage").val().trim(" ");
+        $("textarea#newMessage").val('').focus();
+
+        if (text !== "") {
+            $.ajax({
+                url: "/Profile/NewMessage/",
+                type: "POST",
+                data: { message: text },
+                success: function (data) {
+                    $("#messagesDiv").html('');
+                    $("#messagesDiv").html(data);
+                    //alert(data);
+                    Autoscroll();
+                },
+                error: function (data) {
+                    //alert("error");
+                }
+            });
+        }
+    }
+
+    function Autoscroll() {
+        $('#chat-scroll').animate({
+            scrollTop: $('#chat-scroll').get(0).scrollHeight
+        }, 2000);
+    }
+
+    function Scroll() {
+        $('#chat-scroll').animate({
+            scrollTop: $('#chat-scroll').get(0).scrollHeight
+        }, 0);
+    }
+</script>

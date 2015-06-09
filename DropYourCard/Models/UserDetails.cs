@@ -41,6 +41,7 @@ namespace DropYourCard.Models
         [Required]
         [Display(Name = "Date of birth")]
         [DataType(DataType.Date)]
-        public DateTime? DOB { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime DOB { get; set; }
     }
 }

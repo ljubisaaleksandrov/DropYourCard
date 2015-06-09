@@ -1,0 +1,61 @@
+﻿@using DropYourCard.Data.Models
+@using DropYourCard.Helpers
+@model IEnumerable<DropYourCard.Data.Models.PrivateMessage>
+
+<table  id="messagesDiv" >
+    @{
+        PrivateMessage previousMessage = new PrivateMessage();
+
+        foreach (var item in Model)
+        {
+            var isSuccessiveMessage = item.SenderUserName == previousMessage.SenderUserName && 
+                item.DateCreated.Minute == previousMessage.DateCreated.Minute &&
+                item.DateCreated.Date == previousMessage.DateCreated.Date;
+            <tr>
+                <td style="width: 60%">
+                    @if (item.SenderUserName == UserHelper.LoggedUserUserName())
+                    {
+                        if (isSuccessiveMessage)
+                        {
+                            <p style="width: 80%; float: right; background-color:#cceeff; min-height: 35px; border-radius: 7px; padding-top: 7px; padding-bottom: 10px; padding-left: 10px; margin-top: -22px; white-space: pre-line">@MvcHtmlString.Create(item.Message.Replace(Environment.NewLine, "<br />"))</p>
+                        }
+                        else
+                        {
+                            <p style="width: 80%; float: right; background-color:#cceeff; min-height: 35px; border-radius: 7px; padding-top: 7px; padding-bottom: 10px; padding-left: 10px">@MvcHtmlString.Create(item.Message.Replace(Environment.NewLine, "<br />"))</p>
+                        }
+                    }
+                    else
+                    {
+                        if (isSuccessiveMessage)
+                        {
+                            <p style="width: 80%; float: left; background-color:#aaccff; height: 35px; border-radius: 7px; padding-top: 7px; padding-bottom: 10px; padding-left: 10px; margin-top: -22px">@item.Message</p>
+                        }
+                        else
+                        {
+                            <p style="width: 80%; float: left; background-color:#aaccff; height: 35px; border-radius: 7px; padding-top: 7px; padding-bottom: 10px; padding-left: 10px">@item.Message</p>
+                        }
+                    }
+
+                    @*
+                            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                        *@
+                </td>
+                <td style="width: 16%; text-align: right">
+                    @if (!isSuccessiveMessage)
+                    {
+                         if (item.DateCreated.Date == DateTime.Now.Date)
+                         {
+                             <label style="font-size: 12px; color: blue; text-align: right">@item.DateCreated.ToShortTimeString()</label>
+                         }
+                         else
+                         {
+                             <label style="font-size: 12px; color: blue; text-align: right">@item.DateCreated.Date.ToString("M") @item.DateCreated.ToShortTimeString()</label>
+                         }
+                    }
+                </td>
+            </tr>
+            previousMessage = item;
+        }
+    }
+</table>

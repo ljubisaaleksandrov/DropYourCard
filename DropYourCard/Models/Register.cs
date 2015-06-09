@@ -49,6 +49,6 @@ namespace DropYourCard.Models
         [Required]
         [Display(Name = "Date of birth")]
         [DataType(DataType.Date)]
-        public string DOB { get; set; }
+        public DateTime DOB { get; set; }
     }
 }

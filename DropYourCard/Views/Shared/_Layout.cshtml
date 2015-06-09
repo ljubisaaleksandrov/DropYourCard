@@ -1,83 +1,162 @@
-﻿<!DOCTYPE html>
+﻿@using DropYourCard.Helpers
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-        <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
-	    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
-	    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-	    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
-        <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    </head>
-    <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">
-                        <a href="@Url.Action("Index","Home")">
-                            <img src="~/Images/Common/Logo.jpg"/>
-                        </a>
-                    </p>
-                </div>
-                <div class="float-right" style="height: 90px; padding-top:10px">
-                    <nav class="navbar navbar-left" style="font-size: 20px;">
-                        <ul class="list-inline" style="height:100%">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        @if (Request.IsAuthenticated) {
-                            if (File.Exists(Server.MapPath("~/Images/ProfilePhotos/default.jpg")))
+<head>
+    <meta charset="utf-8"/>
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width"/>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p class="site-title">
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="~/Images/Common/Logo.jpg"/>
+                </a>
+            </p>
+            <p id="prvi">
+                
+            </p>
+            <p id="drugi">
+                
+            </p>
+        </div>
+        <div class="float-right" style="height: 90px; padding-top: 10px">
+            <nav class="navbar navbar-left" style="font-size: 20px;">
+                <ul class="list-inline" style="height: 100%">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (File.Exists(Server.MapPath("~/Images/ProfilePhotos/" + UserHelper.LoggedUser().Id.ToString() + ".jpg")))
+                        {
+                            var path = "~/Images/ProfilePhotos/" + UserHelper.LoggedUser().Id.ToString() + ".jpg";
+                            <li style="padding-left: 50px;">
+                                <img class="img-circle" id="profilePhoto" src="@Href(path)" style="margin-bottom: 20px; height: 50px; width: 50px"/>
+
+                                <img id="messageAvatar" src="~/Images/ProfilePhotos/message.png" style="margin-top: -70px; margin-left: -15px; visibility: collapse"/>
+
+                            </li>
+                        }
+                        else
+                        {
+                            <li style="padding-left: 50px;">
+                                <img id="profilePhoto" src="~/Images/ProfilePhotos/default.jpg" style="height: 64px; width: 64px"/>
+                                <img id="messageAvatar" src="~/Images/ProfilePhotos/message.png" style="margin-bottom: 80px; margin-left: -15px; visibility: hidden"/>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li style="padding-left: 50px;">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    }
+                </ul>
+                <div>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div id="profileMenu" style="min-height: 100px; width: 380px; float: right; z-index: 1001; background-color: aliceblue; margin-top: -28px; -ms-border-radius: 10px; border-radius: 10px; visibility: hidden">
+                            @if (File.Exists(Server.MapPath("~/Images/ProfilePhotos/" + UserHelper.LoggedUser().Id.ToString() + ".jpg")))
                             {
-                                <li style="padding-left: 50px;">
-                                    <img src="~/Images/ProfilePhotos/default.jpg" style="border: #9AD9EA; -ms-border-radius: 5px; border-radius: 5px; border-style: solid; margin-bottom: 20px; height: 64px; width: 64px"/>
-                                    <img id="messageAvatar" src="~/Images/ProfilePhotos/message.png" style="margin-top: -70px; margin-left: -15px; visibility:collapse"/>
-                                </li>
+                                var path = "~/Images/ProfilePhotos/" + UserHelper.LoggedUser().Id.ToString() + ".jpg";
+                                <img class="img-rounded" id="profilePhotoBig" src="@Href(path)" style="margin: 5px; height: 130px; width: 130px"/>
                             }
                             else
                             {
-                                <li style="padding-left: 50px;">
-                                    <img src="~/Images/ProfilePhotos/default.jpg" style="height: 64px; width: 64px"/>
-                                    <img id="messageAvatar" src="~/Images/ProfilePhotos/message.png" style="margin-bottom: 80px; margin-left: -15px; visibility:hidden"/>
-                                </li>
+                                <img id="profilePhotoBig" src="~/Images/ProfilePhotos/default.jpg" style="height: 200px; width: 200px"/>
                             }
-
-                            <li style="margin-left:-10px">@Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new {@class = "username", title = "Manage"})</li>
-                            <li>
-                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
-                                    @Html.AntiForgeryToken()
-                                    <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                            <div style="height: 100%; width: 224px; float: right; margin:5px">
+                                @{
+                                    var userInfo = UserHelper.LoggedUserInfo();
+                                    <label style="font-size: 13px">@userInfo.FirstName @userInfo.LastName<br/><em style="color:dimgray">@UserHelper.LoggedUser().Email</em></label>
+                                    
+                                    <br/>
                                 }
-                            </li>
-                        } else {
-                                <li  style="padding-left: 50px;">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                                <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                        }
-                        </ul>
-                    </nav>
+                                <button id="profile" class="btn">Profile</button>
+                                <button id="settings" class="btn">Settings</button>
+                                <div style="float:right">
+                                    @using (Html.BeginForm("LogOff", "Account"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <button class="btn btn-primary" title="Log out" type="submit">LogOff</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
-            </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="clear-fix content-wrapper">
-                @RenderBody()
-            </section>
+            </nav>
         </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p style="font-size: 14px">&copy; @DateTime.Now.Year - Bravo Team</p>
-                </div>
-            </div>
-        </footer>
+    </div>
+</header>
+<div id="body">
+    @RenderSection("featured", required: false)
+    <section class="clear-fix content-wrapper">
+        @RenderBody()
+    </section>
+</div>
+<footer>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p style="font-size: 14px">&copy; @DateTime.Now.Year - Bravo Team</p>
+        </div>
+    </div>
+</footer>
 
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
-    </body>
+@Scripts.Render("~/bundles/jquery")
+@RenderSection("scripts", required: false)
+</body>
 </html>
+
+<script>
+    $(document).ready(function() {
+        $("button#profile").click(function () {
+                var username = '@UserHelper.LoggedUserUserName()';
+                var href = '@Url.Action("Index", "Profile")' + '/?username=' + username;
+                window.location.href = href;
+        });
+        $("button#settins").click(function () {
+            
+        });
+        $("button#logout").click(function () {
+            
+        });
+
+    });
+
+
+    var mouseOverProfilePicture = false;
+
+    $(document).mouseup(function (e) {
+        var profilePicture = $("#profilePhoto");
+        var profileMenu = $("#profileMenu");
+        if (!profilePicture.is(e.target) && !profileMenu.is(e.target) && profileMenu.has(e.target).length === 0)
+        {
+            $("#profileMenu").css({ visibility: "hidden" });
+            mouseOverProfilePicture = false;
+        }
+        else if (profilePicture.is(e.target)) {
+            if (!mouseOverProfilePicture) {
+                $("#profileMenu").css({ visibility: "visible" });
+                mouseOverProfilePicture = true;
+            }
+            else {
+                $("#profileMenu").css({ visibility: "hidden" });
+                mouseOverProfilePicture = false;
+            }
+        }
+    });
+
+</script>

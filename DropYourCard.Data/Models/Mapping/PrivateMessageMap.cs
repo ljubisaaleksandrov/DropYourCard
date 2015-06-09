@@ -15,13 +15,21 @@ namespace DropYourCard.Data.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(500);
 
+            this.Property(t => t.SenderUserName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            this.Property(t => t.ReceiverUserName)
+                .IsRequired()
+                .HasMaxLength(50);
+
             // Table & Column Mappings
             this.ToTable("PrivateMessage");
             this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.SenderID).HasColumnName("SenderID");
-            this.Property(t => t.ReceiverID).HasColumnName("ReceiverID");
             this.Property(t => t.Message).HasColumnName("Message");
             this.Property(t => t.DateCreated).HasColumnName("DateCreated");
+            this.Property(t => t.SenderUserName).HasColumnName("SenderUserName");
+            this.Property(t => t.ReceiverUserName).HasColumnName("ReceiverUserName");
         }
     }
 }

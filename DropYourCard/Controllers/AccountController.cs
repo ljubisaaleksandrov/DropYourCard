@@ -70,6 +70,11 @@ namespace DropYourCard.Controllers
                     }
                     
                     dataContext.SaveChanges();
+
+                    UserInfo userInfo = dataContext.UserInfoes.FirstOrDefault(u => u.UserID == user.Id);
+                    SessionHelper.Store("FirstName", userInfo.FirstName);
+                    SessionHelper.Store("LastName", userInfo.LastName);
+                    
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -93,7 +98,9 @@ namespace DropYourCard.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-         
+            SessionHelper.Clear("FirstName");
+            SessionHelper.Clear("LastName");
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -152,7 +159,7 @@ namespace DropYourCard.Controllers
                             Address = model.Address,
                             City = model.City,
                             Country = model.Country,
-                            DOB = DateTime.Parse(model.DOB).Date,
+                            DOB = model.DOB,
                             Phone = model.Phone,
                             RegistrationDate = DateTime.Now,
                         };

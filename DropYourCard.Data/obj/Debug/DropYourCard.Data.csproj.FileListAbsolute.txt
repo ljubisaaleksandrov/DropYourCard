@@ -18,3 +18,13 @@ C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropY
 C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.csprojResolveAssemblyReference.cache
 C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.dll
 C:\Users\Mirko\Documents\Visual Studio 2012\Projects\DropCard\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.pdb
+E:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\DropYourCard.Data.dll.config
+E:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\DropYourCard.Data.dll
+E:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\DropYourCard.Data.pdb
+E:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.dll
+E:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.xml
+E:\GitHub\DropYourCard\DropYourCard.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\GitHub\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.csprojResolveAssemblyReference.cache
+E:\GitHub\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.dll
+E:\GitHub\DropYourCard\DropYourCard.Data\obj\Debug\DropYourCard.Data.pdb

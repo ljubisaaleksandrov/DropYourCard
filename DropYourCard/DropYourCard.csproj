@@ -200,9 +200,11 @@
     <Compile Include="Helpers\DeckHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\EmailTemplateGenerator.cs" />
+    <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="Helpers\CsvHelper.cs" />
     <Compile Include="Helpers\TokentGenerator.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Models\Login.cs" />
@@ -281,8 +283,9 @@
     <Content Include="Icon.png" />
     <Content Include="Images\Common\Background.jpg" />
     <Content Include="Images\Common\Logo.jpg" />
+    <Content Include="Images\ProfilePhotos\1.jpg" />
     <Content Include="Images\ProfilePhotos\default.jpg" />
-    <Content Include="Images\ProfilePhotos\message.png" />
+    <Content Include="Images\Common\message.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -329,6 +332,10 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Messages.cshtml" />
+    <Content Include="Views\Profile\_GetChatters.cshtml" />
+    <Content Include="Views\Profile\_GetMessages.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

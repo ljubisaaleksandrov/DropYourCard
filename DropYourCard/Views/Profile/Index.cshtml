@@ -7,6 +7,7 @@
 
 <h2>UserDetails</h2>
 
+<<<<<<< HEAD
 <fieldset>
     <legend>User Details</legend>
 
@@ -94,6 +95,139 @@
 
     </table>
 </fieldset>
+=======
+<table>
+    <thead>
+        <tr>
+            <td>User Details</td>
+        </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.UserName)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.UserName)
+            </div>
+        </td>
+    </tr>
+     <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Password)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Password)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Email)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Email)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.FirstName)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.LastName)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.LastName)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Address)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Address)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.City)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.City)
+            </div>
+        </td>
+    </tr>       
+    <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Country)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Country)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Phone)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Phone)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.DOB)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.DOB)
+            </div>
+        </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+>>>>>>> origin/master
 <p>
     @Html.ActionLink("Edit", "Edit", new {  username=Model.UserName }) |
     @Html.ActionLink("Back to List", "Index")
